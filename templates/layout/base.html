@@ -27,9 +27,8 @@
                         <a class="nav-item nav-link" href="/about">About</a>
                      </div>
                      <nav class="navbar-nav">
-                         <a href="" class="nav-item nav-link">Register</a>
-                         <a href="" class="nav-item nav-link">Login</a>
-                         
+                         <a href="{{ url_for('sign_up') }}" class="nav-item nav-link">Sign Up</a>
+                         <a href="{{ url_for('sign_in') }}" class="nav-item nav-link">Sign In</a>
                      </nav>
                 </div>
             </div>
@@ -39,6 +38,18 @@
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-8">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{category }} alert-dismissable fade show" role="alert">
+                                {{ message }}
+                                <button class="close" type="button" data-dismiss="alert" aria-label="close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 {% block body %}{% endblock %}
             </div>
             <div class="col-md-4">

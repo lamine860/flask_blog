@@ -1,6 +1,6 @@
-from flask import Flask, render_template as render
+from flask import Flask, render_template as render, flash, redirect, url_for
 
-from forms import RegistrationFrom
+from forms import RegistrationFrom, LoginForm
 
 posts = [
     {
@@ -31,12 +31,28 @@ def about():
     return render('about.html', title='About')
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form =  RegistrationFrom()
-    return render('register.html', form=form)
+@app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up():
+    form = RegistrationFrom()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+
+    return render('sign_up.html', form=form, title='Sign Up')
 
 
 
+@app.route('/sign_in', methods=['GET', 'POST'])
+def sign_in():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.fr' and form.password.data == '0000':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login unsuccessful. Please check email and password.', 'danger')    
+    return render('sign_in.html', form=form, title='Sign In')
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
