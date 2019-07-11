@@ -1,25 +1,23 @@
-from flask import Flask, render_template as render, flash, redirect, url_for
+from flask import url_for, flash, render_template as render
+from flask_blog.forms import RegistrationFrom, LoginForm
+from flask_blog import app
 
-from forms import RegistrationFrom, LoginForm
 
 posts = [
     {
-        'title': 'The first post',
-        'body': 'The body of the first post',
-        'date_posted': '07/04/19',
-        'author': 'Lamine Diallo',
+        'author': 'Corey Schafer',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'April 20, 2018'
     },
     {
-
-        'title': 'The second post',
-        'body': 'The body of the second post',
-        'date_posted': '07/04/19',
-        'author': 'Lamine Diallo',
-    },
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'April 21, 2018'
+    }
 ]
-app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 @app.route('/')
 def home():
@@ -52,7 +50,3 @@ def sign_in():
         else:
             flash('Login unsuccessful. Please check email and password.', 'danger')    
     return render('sign_in.html', form=form, title='Sign In')
-
-    
-if __name__ == '__main__':
-    app.run(debug=True)

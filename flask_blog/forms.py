@@ -3,6 +3,21 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 
+posts = [
+    {
+        'title': 'The first post',
+        'body': 'The body of the first post',
+        'date_posted': '07/04/19',
+        'author': 'Lamine Diallo',
+    },
+    {
+
+        'title': 'The second post',
+        'body': 'The body of the second post',
+        'date_posted': '07/04/19',
+        'author': 'Lamine Diallo',
+    },
+]
 
 class RegistrationFrom(FlaskForm):
     
