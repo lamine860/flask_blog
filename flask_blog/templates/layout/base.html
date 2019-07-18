@@ -25,6 +25,9 @@
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="/">Home</a>
                         <a class="nav-item nav-link" href="/about">About</a>
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('new_post') }}" class="nav-item nav-link">New Post</a>
+                        {% endif %}
                      </div>
                      <nav class="navbar-nav">
                         {% if current_user.is_authenticated %}
